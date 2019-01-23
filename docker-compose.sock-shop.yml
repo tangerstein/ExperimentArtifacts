@@ -22,7 +22,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -55,7 +55,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'
@@ -83,7 +83,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -110,7 +110,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -133,7 +133,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'
@@ -163,7 +163,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -190,7 +190,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'
@@ -222,7 +222,7 @@ services:
     deploy:
       placement:
           constraints:
-            - node.hostname==letslx036
+            - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -250,7 +250,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'
@@ -281,7 +281,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -308,7 +308,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'
@@ -335,7 +335,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -365,7 +365,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.5'
@@ -393,7 +393,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.hostname==letslx036
+          - node.hostname==${SUT_SERVER_HOSTNAME}
       resources:
         limits:
           cpus: '0.25'

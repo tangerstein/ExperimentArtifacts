@@ -18,7 +18,7 @@ services:
         deploy:
           placement:
             constraints:
-              - node.hostname==letslx037
+              - node.hostname==${ORCHESTRATOR_SERVER_HOSTNAME}
     importer:
       image: giantswarm/tiny-tools
       depends_on:
@@ -41,7 +41,7 @@ services:
       deploy:
           placement:
             constraints:
-              - node.hostname==letslx037
+              - node.hostname==${ORCHESTRATOR_SERVER_HOSTNAME}
       entrypoint:
         - ./jre/bin/java 
         - -Xms2048m 
