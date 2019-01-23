@@ -1,0 +1,238 @@
+version: '3'
+
+services:
+  eureka:
+    image: continuityproject/eureka
+    hostname: eureka
+    networks:
+      - continuity-network
+    ports:
+      - '8761:8761'
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+  orchestrator:
+    image: continuityproject/orchestrator
+    hostname: orchestrator
+    networks:
+      - continuity-network
+    ports:
+      - '8089:80'
+      - '5009:5000'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -Xdebug
+      - -Xnoagent
+      - -Djava.compiler=NONE
+      - -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000
+      - -jar
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=orchestrator
+
+  rabbitmq:
+    image: rabbitmq:3.6.8-management
+    hostname: rabbitmq
+    networks:
+      - continuity-network
+    ports:
+      - '15672:15672'
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+  idpa-application:
+    image: continuityproject/idpa-application
+    hostname: idpa-application
+    networks:
+      - continuity-network
+    ports:
+      - '8085:80'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=idpa-application
+  idpa-annotation:
+    image: continuityproject/idpa-annotation
+    hostname: idpa-annotation
+    networks:
+      - continuity-network
+    ports:
+      - '8081:80'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=idpa-annotation
+  wessbas:
+    image: continuityproject/wessbas
+    hostname: wessbas
+    networks:
+      - continuity-network
+    ports:
+      - '8082:80'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=wessbas
+  request-rates:
+    image: continuityproject/request-rates
+    hostname: request-rates
+    networks:
+      - continuity-network
+    ports:
+      - '8086:80'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - /bin/app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=request-rates
+  jmeter:
+    image: continuityproject/jmeter
+    hostname: jmeter
+    networks:
+      - continuity-network
+      - shared
+    ports:
+      - '8083:80'
+      - '5003:5000'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1000M
+        reservations:
+          cpus: '0.25'
+          memory: 1000M
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -Xdebug
+      - -Xnoagent
+      - -Djava.compiler=NONE
+      - -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000
+      - -jar
+      - /bin/app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=jmeter
+  session-logs:
+    image: continuityproject/session-logs
+    hostname: session-logs
+    networks:
+      - continuity-network
+    ports:
+      - '8084:80'
+      - '5004:5000'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - -Xdebug
+      - -Xnoagent
+      - -Djava.compiler=NONE
+      - -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=session-logs
+  forecast:
+    image: continuityproject/forecast
+    hostname: forecast
+    networks:
+      - continuity-network
+    ports:
+      - '8087:80'
+    depends_on:
+      - rabbitmq
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.hostname==letslx037
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+      - --port=80
+      - --spring.rabbitmq.host=rabbitmq
+      - --eureka.uri=http://eureka:8761/eureka
+      - --eureka.instance.preferIpAddress=false
+      - --eureka.instance.hostName=forecast
+networks:
+  continuity-network:
+    external: true
+  shared:
+    external: true

@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+    prometheus:
+        image: prom/prometheus
+        container_name: prometheus
+        volumes:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml
+        command:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--storage.tsdb.path=/prometheus'
+        expose:
+          - 9090
+        ports:
+          - 9090:9090
+        networks:
+            - shared
+        deploy:
+          placement:
+            constraints:
+              - node.hostname==letslx037
+    importer:
+      image: giantswarm/tiny-tools
+      depends_on:
+        - grafana
+      entrypoint: /bin/sh import.sh
+      working_dir: /opt/grafana-import-dashboards
+      volumes:
+        - ./grafana:/opt/grafana-import-dashboards
+      links:
+        - grafana:grafana
+      networks: 
+        - shared
+    cmr:
+      image: continuityproject/inspectit-cmr:latest
+      ports:
+        - 8183:8182
+        - 9071:9070
+      networks:
+        - shared
+      deploy:
+          placement:
+            constraints:
+              - node.hostname==letslx037
+      entrypoint:
+        - ./jre/bin/java 
+        - -Xms2048m 
+        - -Xmx2048m 
+        - -Xmn1024M 
+        - -XX:+UseConcMarkSweepGC 
+        - -XX:CMSInitiatingOccupancyFraction=80 
+        - -XX:+UseCMSInitiatingOccupancyOnly 
+        - -XX:+UseParNewGC 
+        - -XX:+CMSParallelRemarkEnabled 
+        - -XX:+DisableExplicitGC 
+        - -XX:SurvivorRatio=5 
+        - -XX:TargetSurvivorRatio=90 
+        - -XX:AutoBoxCacheMax=20000
+        - -XX:BiasedLockingStartupDelay=500
+        - -XX:+UseFPUForSpilling
+        - -XX:+UseFastAccessorMethods
+        - -XX:+UseBiasedLocking
+        - -XX:+UseCompressedOops
+        - -XX:+HeapDumpOnOutOfMemoryError
+        - -server
+        - -verbose:gc
+        - -XX:+PrintGCTimeStamps
+        - -XX:+PrintGCDetails
+        - -XX:+PrintTenuringDistribution
+        - -XX:+UseGCLogFileRotation
+        - -XX:NumberOfGCLogFiles=5
+        - -XX:GCLogFileSize=20M
+        - -Xloggc:logs/gc.log
+        - -jar
+        - inspectit-cmr.jar
+        
+networks:
+  shared:
+    external: true
