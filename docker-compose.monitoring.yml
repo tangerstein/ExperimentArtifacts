@@ -22,8 +22,8 @@ services:
     cmr:
       image: continuityproject/inspectit-cmr:latest
       ports:
-        - 8183:8182
-        - 9071:9070
+        - 8182:8182
+        - 9070:9070
       networks:
         - shared
       deploy:
