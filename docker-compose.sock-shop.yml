@@ -19,9 +19,9 @@ services:
     read_only: true
     ports:
      - '8888:8888'
-    cpuset: "0"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "0,1"
+    mem_reservation: 4G
+    mem_limit: 4G
 
   edge-router:
     image: weaveworksdemos/edge-router:0.1.1
@@ -44,9 +44,9 @@ services:
       - /var/run:rw,noexec,nosuid
     hostname: edge-router
     restart: always
-    cpuset: "1"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "2,3"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
   
   queue-master:
@@ -64,9 +64,9 @@ services:
       - NET_BIND_SERVICE
     tmpfs:
       - /tmp:rw,noexec,nosuid
-    cpuset: "2"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "4,5"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
   
   catalogue:
@@ -83,9 +83,9 @@ services:
     cap_add:
       - NET_BIND_SERVICE
     read_only: true
-    cpuset: "3"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "6,7"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9001:80'  
@@ -99,9 +99,9 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=socksdb
-    cpuset: "4"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "8,9"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
   
   carts:
@@ -121,9 +121,9 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xbootclasspath/p:/agent/inspectit-agent.jar -javaagent:/agent/inspectit-agent.jar -Dinspectit.repository=dl360-1.fsoc.hpi.uni-potsdam.de:9070 -Dinspectit.agent.name=weaveworksdemos-carts -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom 
-    cpuset: "5"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "10,11"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9002:80'
@@ -142,9 +142,9 @@ services:
       - SETUID
     tmpfs:
       - /tmp:rw,noexec,nosuid
-    cpuset: "6"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "12,13"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
   
   orders:
@@ -166,9 +166,9 @@ services:
      - JAVA_OPTS=-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=2500 -Xbootclasspath/p:/agent/inspectit-agent.jar -javaagent:/agent/inspectit-agent.jar -Dinspectit.repository=dl360-1.fsoc.hpi.uni-potsdam.de:9070 -Dinspectit.agent.name=weaveworksdemos-orders -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -Djava.security.egd=file:/dev/urandom
     ports:
       - '2500:2500'
-    cpuset: "7"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "14,15"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9003:80'
@@ -188,9 +188,9 @@ services:
       - SETUID
     tmpfs:
       - /tmp:rw,noexec,nosuid
-    cpuset: "8"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "16,17"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
 
   
@@ -211,9 +211,9 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xbootclasspath/p:/agent/inspectit-agent.jar -javaagent:/agent/inspectit-agent.jar -Dinspectit.repository=dl360-1.fsoc.hpi.uni-potsdam.de:9070 -Dinspectit.agent.name=weaveworksdemos-shipping -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
-    cpuset: "9"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "18,19"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9004:80'
@@ -232,9 +232,9 @@ services:
       - SETUID
       - DAC_OVERRIDE
     read_only: true
-    cpuset: "10"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "20,21"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
 
   payment:
@@ -251,9 +251,9 @@ services:
     cap_add:
       - NET_BIND_SERVICE
     read_only: true
-    cpuset: "11"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "22,23"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9005:80'
@@ -274,9 +274,9 @@ services:
     cap_add:
       - NET_BIND_SERVICE
     read_only: true
-    cpuset: "12"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "24,25"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
 
 
@@ -294,9 +294,9 @@ services:
       - SETUID
     tmpfs:
       - /tmp:rw,noexec,nosuid
-    cpuset: "13"
-    mem_reservation: 2G
-    mem_limit: 2G
+    cpuset: "26,27"
+    mem_reservation: 4G
+    mem_limit: 4G
     user: root
     ports:
      - '9006:80'
