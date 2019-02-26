@@ -166,12 +166,11 @@ services:
      - JAVA_OPTS=-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=2500 -Xbootclasspath/p:/agent/inspectit-agent.jar -javaagent:/agent/inspectit-agent.jar -Dinspectit.repository=dl360-1.fsoc.hpi.uni-potsdam.de:9070 -Dinspectit.agent.name=weaveworksdemos-orders -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -Djava.security.egd=file:/dev/urandom
     ports:
       - '2500:2500'
+      - '9003:80'
     cpuset: "14,15"
     mem_reservation: 4G
     mem_limit: 4G
     user: root
-    ports:
-     - '9003:80'
 
   
   orders-db:
@@ -278,6 +277,8 @@ services:
     mem_reservation: 4G
     mem_limit: 4G
     user: root
+    ports:
+     - '9006:80'
 
 
   user-db:
@@ -298,8 +299,6 @@ services:
     mem_reservation: 4G
     mem_limit: 4G
     user: root
-    ports:
-     - '9006:80'
 
 
 networks:
