@@ -15,10 +15,6 @@ services:
           - 9090:9090
         networks:
             - shared
-        deploy:
-          placement:
-            constraints:
-              - node.hostname==dl360-1
 
     zipkin:
       image: openzipkin/zipkin
@@ -26,10 +22,6 @@ services:
         - 9411:9411
       networks:
         - shared
-      deploy:
-          placement:
-            constraints:
-              - node.hostname==dl360-1
         
 networks:
   shared:

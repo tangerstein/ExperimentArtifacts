@@ -9,8 +9,7 @@ services:
     hostname: front-end
     command: nodemon -L --inspect=0.0.0.0:8888 /usr/src/app/server.js
     environment:
-      - ZIPKIN_PORT=8182
-      - ZIPKIN_HOST=dl360-1.fsoc.hpi.uni-potsdam.de
+      - ZIPKIN_URL=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/api/v1/spans
     user: root
 
     restart: always
@@ -75,7 +74,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/rest/api/v1/spans
+      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/api/v1/spans
     hostname: catalogue
     restart: always
     cap_drop:
@@ -242,7 +241,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/rest/api/v1/spans
+      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/api/v1/spans
     hostname: payment
     restart: always
     cap_drop:
@@ -263,7 +262,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/rest/api/v1/spans
+      - ZIPKIN=http://dl360-1.fsoc.hpi.uni-potsdam.de:8182/api/v1/spans
       - MONGO_HOST=user-db:27017
 
     hostname: user
