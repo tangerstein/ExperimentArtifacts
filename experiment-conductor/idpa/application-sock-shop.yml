@@ -303,7 +303,6 @@ endpoints:
   - 'Accept: application/json'
   - 'Content-Type: application/json'
   - 'X-Requested-With: XMLHttpRequest'
-  - 'Authorization: Basic dXNlcjpwYXNzd29yZA=='
   parameters:
   - &loginUsingGET_base64authentification_HEADER name: Authorization
     parameter-type: HEADER

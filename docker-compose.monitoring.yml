@@ -19,48 +19,17 @@ services:
           placement:
             constraints:
               - node.hostname==dl360-1
-    cmr:
-      image: continuityproject/inspectit-cmr:latest
+
+    zipkin:
+      image: openzipkin/zipkin
       ports:
-        - 8182:8182
-        - 9070:9070
+        - 9411:9411
       networks:
         - shared
       deploy:
           placement:
             constraints:
               - node.hostname==dl360-1
-      entrypoint:
-        - ./jre/bin/java 
-        - -Xms9G 
-        - -Xmx9G 
-        - -Xmn3G 
-        - -XX:+UseConcMarkSweepGC 
-        - -XX:CMSInitiatingOccupancyFraction=80 
-        - -XX:+UseCMSInitiatingOccupancyOnly 
-        - -XX:+UseParNewGC 
-        - -XX:+CMSParallelRemarkEnabled 
-        - -XX:+DisableExplicitGC 
-        - -XX:SurvivorRatio=5 
-        - -XX:TargetSurvivorRatio=90 
-        - -XX:AutoBoxCacheMax=20000
-        - -XX:BiasedLockingStartupDelay=500
-        - -XX:+UseFPUForSpilling
-        - -XX:+UseFastAccessorMethods
-        - -XX:+UseBiasedLocking
-        - -XX:+UseCompressedOops
-        - -XX:+HeapDumpOnOutOfMemoryError
-        - -server
-        - -verbose:gc
-        - -XX:+PrintGCTimeStamps
-        - -XX:+PrintGCDetails
-        - -XX:+PrintTenuringDistribution
-        - -XX:+UseGCLogFileRotation
-        - -XX:NumberOfGCLogFiles=5
-        - -XX:GCLogFileSize=20M
-        - -Xloggc:logs/gc.log
-        - -jar
-        - inspectit-cmr.jar
         
 networks:
   shared:
