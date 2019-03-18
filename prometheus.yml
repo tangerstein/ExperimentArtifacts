@@ -16,7 +16,7 @@ scrape_configs:
       scrape_interval: 5s
       metrics_path: 'metrics'
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de']
 
     # The job name assigned to scraped metrics by default.
     - job_name: "catalogue"
@@ -25,40 +25,39 @@ scrape_configs:
       # List of labeled statically configured targets for this job.
       static_configs:
         # The targets specified by the static config.
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9001']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9001']
 
     - job_name: "payment"
       scrape_interval: 5s
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9005']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9005']
 
     - job_name: "user"
       scrape_interval: 5s
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9006']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9006']
 
     - job_name: "orders"
       scrape_interval: 5s
       # The HTTP resource path on which to fetch metrics from targets.
       metrics_path: 'metrics'
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9003']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9003']
 
     - job_name: "cart"
       scrape_interval: 5s
       metrics_path: 'metrics'
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9002']
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9002']
 
     - job_name: "shipping"
       scrape_interval: 5s
       metrics_path: 'metrics'
       static_configs:
-        - targets: ['dl360-1.fsoc.hpi.uni-potsdam.de:9004']
-    
+        - targets: ['rx600s6-6.fsoc.hpi.uni-potsdam.de:9004']
+
     - job_name: 'jmeter'
       scrape_interval: 5s
       metrics_path: 'application/prometheus'
       static_configs:
       - targets: ['jmeter']
-
