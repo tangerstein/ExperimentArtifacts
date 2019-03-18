@@ -9,7 +9,7 @@ services:
     hostname: front-end
     command: nodemon -L --inspect=0.0.0.0:8888 /usr/src/app/server.js
     environment:
-      - ZIPKIN_URL=http://dl360-1.fsoc.hpi.uni-potsdam.de:9411/api/v1/spans
+      - ZIPKIN_URL=http://dl360-1.fsoc.hpi.uni-potsdam.de:9411/api/v2/spans
     user: root
 
     restart: always

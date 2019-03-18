@@ -24,7 +24,7 @@ services:
         - shared
 
     open-xtrace:
-      image: continuityproject/zipkin-to-open-xtrace-converter:0.0.1
+      image: continuityproject/zipkin-to-open-xtrace-converter:0.0.2
       ports:
         - 8345:8345
       networks:
