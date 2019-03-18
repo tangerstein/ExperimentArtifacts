@@ -110,8 +110,6 @@ services:
       - shared
     hostname: carts
     restart: always
-    volumes:
-      - ./:/agent
     cap_drop:
       - all
     cap_add:
@@ -147,14 +145,12 @@ services:
     user: root
   
   orders:
-    image: continuityproject/sock-shop-orders
+    image: weaveworksdemos/orders:0.4.7
     networks:
       - sock-shop
       - shared
     hostname: orders
     restart: always
-    volumes:
-      - ./:/agent
     cap_drop:
       - all
     cap_add:
@@ -199,8 +195,6 @@ services:
       - shared
     hostname: shipping
     restart: always
-    volumes:
-      - ./:/agent
     cap_drop:
       - all
     cap_add:
