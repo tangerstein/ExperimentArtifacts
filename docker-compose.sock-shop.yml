@@ -9,7 +9,7 @@ services:
     hostname: front-end
     command: nodemon -L --inspect=0.0.0.0:8888 /usr/src/app/server.js
     environment:
-      - ZIPKIN_URL=http://172.16.145.68:8182/api/v1/spans
+      - ZIPKIN_URL=http://172.16.145.68:9411/api/v2/spans
     user: root
 
     restart: always
@@ -71,7 +71,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://172.16.145.68:8182/api/v1/spans
+      - ZIPKIN=http://172.16.145.68:9411/api/v1/spans
     hostname: catalogue
     restart: always
     cap_drop:
@@ -114,7 +114,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=172.16.145.68
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=http://172.16.145.68:9411
     mem_reservation: 4G
     mem_limit: 4G
     user: root
@@ -155,7 +155,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-     - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=172.16.145.68
+     - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=http://172.16.145.68:9411
     ports:
       - '2500:2500'
       - '9003:80'
@@ -199,7 +199,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=172.16.145.68
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=true -Dspring.zipkin.baseUrl=http://172.16.145.68:9411
     mem_reservation: 4G
     mem_limit: 4G
     user: root
@@ -230,7 +230,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://172.16.145.68:8182/api/v1/spans
+      - ZIPKIN=http://172.16.145.68:9411/api/v1/spans
     hostname: payment
     restart: always
     cap_drop:
@@ -250,7 +250,7 @@ services:
       - sock-shop
       - shared
     environment:
-      - ZIPKIN=http://172.16.145.68:8182/api/v1/spans
+      - ZIPKIN=http://172.16.145.68:9411/api/v1/spans
       - MONGO_HOST=user-db:27017
 
     hostname: user

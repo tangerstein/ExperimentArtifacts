@@ -13,16 +13,13 @@ services:
           - 9090
         ports:
           - 9090:9090
-        networks:
-            - shared
 
     zipkin:
       image: openzipkin/zipkin
       ports:
         - 9411:9411
-      networks:
-        - shared
-        
-networks:
-  shared:
-    external: true
+
+    open-xtrace:
+      image: continuityproject/zipkin-to-open-xtrace-converter:0.0.1
+      ports:
+        - 8345:8345
