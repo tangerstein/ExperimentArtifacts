@@ -2,14 +2,14 @@ version: '2.2'
 
 services:
   eureka:
-    image: continuityproject/eureka:1.5.162
+    image: continuityproject/eureka:1.6.173
     hostname: eureka
     networks:
       - continuity-network
     ports:
       - '8761:8761'
   orchestrator:
-    image: continuityproject/orchestrator:1.5.162
+    image: continuityproject/orchestrator:1.6.173
     hostname: orchestrator
     networks:
       - continuity-network
@@ -43,7 +43,7 @@ services:
     ports:
       - '15672:15672'
   idpa-application:
-    image: continuityproject/idpa-application:1.5.162
+    image: continuityproject/idpa-application:1.6.173
     hostname: idpa-application
     networks:
       - continuity-network
@@ -62,7 +62,7 @@ services:
       - --eureka.instance.preferIpAddress=false
       - --eureka.instance.hostName=idpa-application
   idpa-annotation:
-    image: continuityproject/idpa-annotation:1.5.162
+    image: continuityproject/idpa-annotation:1.6.173
     hostname: idpa-annotation
     networks:
       - continuity-network
@@ -81,7 +81,7 @@ services:
       - --eureka.instance.preferIpAddress=false
       - --eureka.instance.hostName=idpa-annotation
   wessbas:
-    image: continuityproject/wessbas:1.5.162
+    image: continuityproject/wessbas:1.6.173
     hostname: wessbas
     networks:
       - continuity-network
@@ -100,7 +100,7 @@ services:
       - --eureka.instance.preferIpAddress=false
       - --eureka.instance.hostName=wessbas
   request-rates:
-    image: continuityproject/request-rates:1.5.162
+    image: continuityproject/request-rates:1.6.173
     hostname: request-rates
     networks:
       - continuity-network
@@ -119,7 +119,7 @@ services:
       - --eureka.instance.preferIpAddress=false
       - --eureka.instance.hostName=request-rates
   jmeter:
-    image: continuityproject/jmeter:1.5.162
+    image: continuityproject/jmeter:1.6.173
     hostname: jmeter
     networks:
       - continuity-network
@@ -147,7 +147,7 @@ services:
       - --eureka.instance.preferIpAddress=false
       - --eureka.instance.hostName=jmeter
   session-logs:
-    image: continuityproject/session-logs:1.5.162
+    image: continuityproject/session-logs:1.6.173
     hostname: session-logs
     networks:
       - continuity-network
