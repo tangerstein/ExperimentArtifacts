@@ -36,3 +36,14 @@ endpoints:
   - 'Content-Type: application/x-www-form-urlencoded'
   - 'X-Requested-With: XMLHttpRequest'
   protocol: http
+
+- !<http>
+  &catalogueGetCatalogueUsingGET domain: catalogue
+  port: 80
+  path: /catalogue
+  method: GET
+  headers:
+  - 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  - 'Content-Type: application/x-www-form-urlencoded'
+  - 'X-Requested-With: XMLHttpRequest'
+  protocol: http
